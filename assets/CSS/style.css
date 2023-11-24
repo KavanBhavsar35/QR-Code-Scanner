@@ -20,6 +20,8 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+    /* overflow-x; */
+    /* overflow-x:wrap; */
   }
   
 body{
@@ -29,13 +31,18 @@ body{
     width: auto;
     height: calc(100% - 16px);
     overflow-y: auto;
+    overflow-wrap: normal;
 }
 .title{
     color: #d67615;
     font-family: 'Comfortaa', sans-serif;
-    font-size:large;
+    font-size:37px;
     font-weight: 700;
     background-color: #2d2d36;
+}
+
+p.title{
+    margin-bottom:0px;
 }
 /* .tabContent{
     display: grid;
@@ -43,12 +50,21 @@ body{
     grid-template-rows: 300px;
     grid-column-gap: 6px;
 } */
-.qrContainer,.descContainer{
+.content{
+    flex-direction: column-reverse;
+}
+.qrContainer{
     top:12.5%;
     height: 350px;
     width: 350px;
     margin-top: 25px;
     /* background-color: gray; */
+}
+.descContainer{
+    /* top:12.5%; */
+    /* height: 350px; */
+    width: 350px;
+    /* margin-top: 25px; */
 }
 .qrContainer{
     background-color: grey;
@@ -95,10 +111,10 @@ i.bi.bi-camera{
 
 .descContainer{
     background-color: transparent;
-    margin-left: 30px;
+    /* margin-left: 30px; */
     align-items: center;
     font-family: 'Nunito', sans-serif;
-    width: 80%;
+    /* width: 80%; */
 }
 .descContainer ul{
     list-style: none;
@@ -111,7 +127,182 @@ i.bi.bi-camera{
     padding-left: 40px;
     font-size: 25px;
 }
-@media (min-width: 768px) and (max-width: 991.98px) {
+#result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 1.5rem;
+    margin-top: 10px;
+    width: 80%;
+    height: 75%;
+    background-color: transparent;
+}
+
+.resTitle {
+    font-size: 50px;
+    font-weight: 600;
+}
+
+.resultLink {
+    display: block;
+    right: 12.5%;
+    width: 75%;
+    padding: 10px;
+    padding-top: 20px;
+    padding-bottom: 0;
+    font-size: 16px;
+    line-height: 1.4;
+    border: 3px solid #ccc;
+    border-radius: 12px 12px 0px 0px;
+    resize: none;
+    overflow-x:auto;
+    overflow-y: hidden;
+    height: 80px;
+    max-height: 100px;
+    background-color: rgb(84, 84, 84);
+}
+
+.resultLink::-webkit-scrollbar {
+    width:  10px;
+}
+
+.resultLink::-webkit-scrollbar-thumb {
+    background-color: #2d2d36;
+    border-radius: 5px 5px 0px 0px ;
+    width: 1px;
+}
+
+.resultLink::-webkit-scrollbar-track {
+    background-color: transparent;
+    width: 3px;
+}
+
+.resultLink::-webkit-scrollbar-track-piece{
+    width: 3px;
+}
+.resultLink::-webkit-scrollbar-corner {
+    background-color: transparent
+}
+#reader {
+    margin: 0px;
+    margin-top: 30px;
+    top: 12.5%;
+    height: 310px;
+    width: 310px;
+    /* background-color: gray; */
+    display: flex;
+    justify-self: center;
+    background-color: grey;
+    border-radius: 30px;
+    padding: 20px;
+    -webkit-box-shadow: 4px 4px 32px 3px rgba(97, 88, 97, 1);
+    -moz-box-shadow: 4px 4px 32px 3px rgba(97, 88, 97, 1);
+    box-shadow: 4px 4px 32px 3px rgba(97, 88, 97, 1);
+    align-self: center;
+}
+
+#qr-canvas-visible {
+    height: 100% !important;
+    width: 100% !important;
+    border: 5px dashed whitesmoke;
+    border-radius: 30px;
+    position: relative;
+    overflow: hidden;
+    transition: background 400ms;
+    z-index:2;
+    /* z-index: -1; */
+}
+#qr-shaded-region {
+    display: none;
+}
+video{
+    padding: 0;
+    margin: 0;
+
+}
+#qr-canvas {
+    height: none;
+    width: none;
+}
+
+input[type="file"] {
+    border: 2px solid black;
+    border-radius: 12px;
+    margin: 6px 0px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-right: none;
+    width: 284px;
+}
+
+div.fileInput span.material-symbols-outlined {
+    border: 2px solid black;
+    border-radius: 12px;
+    padding: 7px 2px 7px 0px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-left: none;
+    cursor: pointer;
+}
+
+div.fileInput span.material-symbols-outlined:hover {
+    background-color: rgba(0, 0, 0, 0.112);
+}
+
+input[type="file"]::-webkit-file-upload-button {
+    display: inline-block;
+    padding: 5px 7px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: 2px solid #2d2d36a2;
+    border-radius: 5px;
+    color: #ffffff;
+    background-color: #2d2d36;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+.footer {
+    background-color: #2d2d36;
+    color: whitesmoke;
+    font-family: 'Nunito', sans-serif;
+    position: relative;
+    top: 45px;
+}
+/* 
+footer.footer .container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap:nowrap;
+    justify-content: space-between;
+}
+
+.footer p {
+    margin: 0;
+} */
+i.bi.bi-github{
+    width: 24px;
+    height: 24px;
+    padding-left: 3px;
+    padding-right: 7px;
+}
+i.bi.bi-qr-code-scan{
+    margin-right: 3px;
+}
+
+input[type="file"]::-webkit-file-upload-button:hover {
+    background-color: rgb(60, 60, 65);
+
+
+}
+@media (min-width: 767.98px) and (max-width: 991.98px) {
     .descContainer ul li{
         display: flex;
         align-items: center;
@@ -119,16 +310,27 @@ i.bi.bi-camera{
         font-size: 25px;
     }
 }
-@media (min-width: 992px) and (max-width: 1200px) {
+@media (min-width: 991.98px) and (max-width: 1199.98px) {
     .qrContainer{
         height: 310px;
         min-width: 310px;
         margin: 5px;
     }
 }
-@media (min-width: 1px) and (max-width: 576px) {
+@media (min-width: 1px) and (max-width: 767.98px) {
+    .descContainer{
+        width: 100%;
+    }
+    footer.footer div.container {
+        width: 98%;
+    }
+}
+@media (min-width: 1px) and (max-width: 575.98px) {
     .title{
         text-align: center;
+        text-wrap: nowrap;
+        font-size: 25px;
+        display: none;
     }
     .content{
         display: flex;
@@ -137,15 +339,14 @@ i.bi.bi-camera{
     .qrContainer{
         margin: 5px 10px;
     }
-    .descContainer{
-        margin-top: 80px;
-        padding-top: 80px;
-    }
     .descContainer ul li{
         display: flex;
-        align-items: center;
+        align-items: start;
         padding-left: 8px;
         font-size: 16px;
+    }
+    .footer-content{
+        flex-direction: column;
     }
 }
 span.ripple {

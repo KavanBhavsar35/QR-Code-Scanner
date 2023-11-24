@@ -28,3 +28,83 @@ button.addEventListener("click", createRipple);
 }
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+  let qr = document.getElementById("qr");
+  let resultDiv = document.getElementById("result");
+  let cameraId;
+  let result;
+
+  qr.addEventListener('click', function () {
+    Html5Qrcode.getCameras().then(devices => {
+      if (devices && devices.length) {
+        cameraId = devices[0].id;
+        console.log(cameraId);
+        const scanner = new Html5Qrcode(/* element id */ "reader");
+        const config = { fps: 10, qrbox: { width: 250, height: 250 }, facingMode: "environment" , aspectRatio:1};
+        
+        scanner.start(
+          cameraId,
+          config,
+          (decodedText, decodedResult) => {
+            scanner.stop();
+            resultDiv.innerHTML = `
+              <h2>Success</h2>
+              <p><a href='${decodedText}' target='_blank'>${decodedText}</a></p> 
+            `;
+            setTimeout(() => {
+              scanner.clear();
+              document.getElementById("reader").remove();
+            }, 1000);
+          },
+          (errorMessage) => {
+            console.log(errorMessage);
+          }).catch((err) => {
+            console.log(err);
+          });
+      }
+    }).catch(err => {
+      console.log(err);
+    });
+  });
+
+  const html5QrCode = new Html5Qrcode(/* element id */ "reader");
+  const fileinput = document.getElementById('qr-input-file');
+  
+  fileinput.addEventListener('change', e => {
+    if (e.target.files.length == 0) {
+      return;
+    }
+
+    const imageFile = e.target.files[0];
+    html5QrCode.scanFile(imageFile, true)
+      .then(decodedText => {
+        resultDiv.innerHTML = `
+        <h2>Success</h2>
+        <p><a href='${decodedText}' target='_blank'>${decodedText}</a></p> 
+      `;
+      })
+      .catch(err => {
+        console.log(`Error scanning file. Reason: ${err}`);
+      });
+  });
+});
+document.addEventListener('DOMContentLoaded', function () {
+  const fileInput = document.getElementById('qr-input-file');
+  const deleteIcon = document.getElementById('deleteIcon');
+  const qrContainer = document.getElementById('reader');
+  // Event listener for delete icon
+  deleteIcon.addEventListener('click', function () {
+    // Clear the file input value
+    fileInput.value = '';
+
+    // You can add additional logic here if needed
+
+    console.log('File input cleared');
+  });
+
+
+  const yearSpan = document.getElementById("year");
+  let currentYear = new Date().getFullYear();
+  yearSpan.textContent = currentYear;
+});
+

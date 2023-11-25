@@ -54,26 +54,22 @@ document.addEventListener("DOMContentLoaded", function () {
               spinnerContainer.classList.add('d-none');
 
               const scanner = new Html5Qrcode(/* element id */ "reader2");
+              const qrCodeSuccessCallback = (decodedText, decodedResult) => {
+                    scanner.stop();
+                    description.classList.add('d-none')
+                    result.classList.remove('d-none')
+                    document.getElementById('modalClose').click();
+                    spinnerContainer.classList.add('d-none');
+                    resultDiv.innerHTML = `
+                        <a href='${decodedText}' target='_blank'>${decodedText}</a>
+                    `;
+            };
               const config = { fps: 60, qrbox: { width: 250, height: 250 }, aspectRatio: 1 };
               const modal = document.getElementById('scanner')
               scanner.start({facingMode:"environment"},
-                  cameraId,
+                //   cameraId,
                   config,
-                  (decodedText, decodedResult) => {
-                      scanner.stop();
-                      description.classList.add('d-none')
-                      result.classList.remove('d-none')
-                      document.getElementById('modalClose').click();
-                      spinnerContainer.classList.add('d-none');
-
-                      resultDiv.innerHTML = `
-              <a href='${decodedText}' target='_blank'>${decodedText}</a>
-            `;
-                      // setTimeout(() => {
-                      //     scanner.clear();
-                      //     // document.getElementById("reader2").remove();
-                      // }, 1000);
-                  },
+                  qrCodeSuccessCallback,
                   (errorMessage) => {
                       console.log(errorMessage);
                   }).catch((err) => {

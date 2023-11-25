@@ -54,9 +54,9 @@ document.addEventListener("DOMContentLoaded", function () {
               spinnerContainer.classList.add('d-none');
 
               const scanner = new Html5Qrcode(/* element id */ "reader2");
-              const config = { fps: 60, qrbox: { width: 250, height: 250 }, facingMode: "environment", aspectRatio: 1 };
+              const config = { fps: 60, qrbox: { width: 250, height: 250 }, aspectRatio: 1 };
               const modal = document.getElementById('scanner')
-              scanner.start(
+              scanner.start({facingMode:"environment"},
                   cameraId,
                   config,
                   (decodedText, decodedResult) => {

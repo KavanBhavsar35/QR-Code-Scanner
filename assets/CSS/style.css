@@ -26,7 +26,6 @@ html, body {
   
 body{
     background: #42424a !important;
-    /* background: linear-gradient(174deg, rgba(8,28,21,1) 0%, rgba(82,183,136,1) 50%, rgba(216,243,220,1) 100%); */
     font-family: 'Roboto Mono', monospace; 
     width: auto;
     height: calc(100% - 16px);
@@ -67,14 +66,21 @@ p.title{
     /* margin-top: 25px; */
 }
 .qrContainer{
+    margin: 0px;
+    margin-top: 30px;
+    top: 12.5%;
+    height: 310px;
+    width: 310px;
+    /* background-color: gray; */
+    display: flex;
+    justify-self: center;
     background-color: grey;
     border-radius: 30px;
     padding: 20px;
-    -webkit-box-shadow: 4px 4px 32px 3px rgba(97,88,97,1);
-    -moz-box-shadow: 4px 4px 32px 3px rgba(97,88,97,1);
-    box-shadow: 4px 4px 32px 3px rgba(97,88,97,1);
+    -webkit-box-shadow: 4px 4px 32px 3px rgba(97, 88, 97, 1);
+    -moz-box-shadow: 4px 4px 32px 3px rgba(97, 88, 97, 1);
+    box-shadow: 4px 4px 32px 3px rgba(97, 88, 97, 1);
     align-self: center; 
-    margin-left: 30px; 
 }
 .qr{
     height: 100%;
@@ -127,6 +133,9 @@ i.bi.bi-camera{
     padding-left: 40px;
     font-size: 25px;
 }
+#description{
+    margin-left: 30px;
+}
 #result {
     display: flex;
     flex-direction: column;
@@ -161,7 +170,9 @@ i.bi.bi-camera{
     overflow-y: hidden;
     height: 80px;
     max-height: 100px;
-    background-color: rgb(84, 84, 84);
+    /* background-color: rgb(84, 84, 84); */
+    background-color: #ffffff23;
+    backdrop-filter: blur(5px);
 }
 
 .resultLink::-webkit-scrollbar {
@@ -186,7 +197,7 @@ i.bi.bi-camera{
     background-color: transparent
 }
 #reader {
-    margin: 0px;
+    margin: 5px;
     margin-top: 30px;
     top: 12.5%;
     height: 310px;
@@ -202,7 +213,12 @@ i.bi.bi-camera{
     box-shadow: 4px 4px 32px 3px rgba(97, 88, 97, 1);
     align-self: center;
 }
-
+#reader2{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
 #qr-canvas-visible {
     height: 100% !important;
     width: 100% !important;
@@ -265,6 +281,15 @@ input[type="file"]::-webkit-file-upload-button {
     background-color: #2d2d36;
     transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
+.qrModal{
+    padding: 20px !important;
+    border: 2px solid rgba(52, 78, 65, 0.455) !important;
+    /* background-color: rgba(255, 255, 255, 0.49)  !important; */
+    background-color: rgba(255, 255, 255, 0.16)  !important;
+    border-radius: 10px !important;
+    backdrop-filter: blur(6px) !important;
+
+}
 .footer {
     background-color: #2d2d36;
     color: whitesmoke;
@@ -315,6 +340,7 @@ input[type="file"]::-webkit-file-upload-button:hover {
         height: 310px;
         min-width: 310px;
         margin: 5px;
+        margin-top: 30px;
     }
 }
 @media (min-width: 1px) and (max-width: 767.98px) {

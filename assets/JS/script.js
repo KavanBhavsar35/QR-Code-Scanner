@@ -1,11 +1,9 @@
-// Function to create a ripple effect on button click
 function createRipple(event) {
   const button = event.currentTarget;
   const circle = document.createElement("span");
   const diameter = Math.max(button.clientWidth, button.clientHeight);
   const radius = diameter / 2;
 
-  // Set up styles for the ripple effect
   circle.style.width = circle.style.height = `${diameter}px`;
   circle.style.left = `${event.clientX - button.offsetLeft - radius}px`;
   circle.style.top = `${event.clientY - button.offsetTop - radius}px`;
@@ -17,7 +15,6 @@ function createRipple(event) {
       ripple.remove();
   }
 
-  // Append the new ripple
   button.appendChild(circle);
 }
 function stopScanner() {
@@ -42,7 +39,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const resultDiv = document.getElementById('resultContent');
   const closeScannerButton = document.getElementById('closeScanner');
   const closeScannerButton2 = document.getElementById('closeScanner2');
-  
+  const description = document.getElementById('description');
+  const result = document.getElementById('result');
+  const deleteIcon = document.getElementById('deleteIcon');
+
   qrContainer.addEventListener('click', function () {
       let scannerOpen=true;
       const spinnerContainer = document.querySelector('.spinner-container');
@@ -107,17 +107,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
   });
 
-  // Event listener for handling file input change
   fileInput.addEventListener('change', e => {
       if (e.target.files.length == 0) {
           return;
       }
 
       const imageFile = e.target.files[0];
-      document.getElementById('qrContainer').style.display = 'none';
-      document.getElementById('reader').style.display = 'block';
-      document.getElementById('description').classList.add('d-none')
-      document.getElementById('result').classList.remove('d-none')
+
+      qrContainer.style.display='none'
+      reader.style.display='block';
+      description.classList.add('d-none')
+      result.classList.remove('d-none')
       html5QrCode.scanFile(imageFile, true)
           .then(decodedText => {
               resultDiv.innerHTML = `
@@ -128,14 +128,6 @@ document.addEventListener("DOMContentLoaded", function () {
               console.log(`Error scanning file. Reason: ${err}`);
           });
   });
-});
-// deleting file and clearing output
-document.addEventListener('DOMContentLoaded', function () {
-  const fileInput = document.getElementById('qr-input-file');
-  const deleteIcon = document.getElementById('deleteIcon');
-  const qrContainer = document.getElementById('qrContainer');
-  const reader = document.getElementById('reader');
-  // Event listener for delete icon
 
   deleteIcon.addEventListener('click', function () {
       // Clear the file input value
@@ -143,17 +135,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
       // Remove the QR code container and its contents
       if (reader) {
-          reader.innerHTML = ''; // Clear the contents inside the QR container
-          // qrContainer.style.display = 'none'; // Hide the QR container
+          reader.innerHTML = ''; 
           qrContainer.style.display = 'block';
-          document.getElementById('reader').style.display = 'none';
-          document.getElementById('description').classList.remove('d-none')
-          document.getElementById('result').classList.add('d-none')
+          reader.style.display = 'none';
+          description.classList.remove('d-none')
+          result.classList.add('d-none')
       }
   });
 });
-// Additional event listeners or logic as needed
-// ...
+
 document.addEventListener('DOMContentLoaded', function () {
   uploadFileLink.addEventListener('click', function () {
       fileInput.click();
